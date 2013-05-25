@@ -55,7 +55,8 @@ Meteor.methods({
       baseScore: 0,
       score: 0,
       inactive: false,
-      status: status
+      status: status,
+      resources: []
     });
     
     if(status == STATUS_APPROVED){
