@@ -46,7 +46,7 @@ Meteor.publish('singlePost', function(id) {
 Meteor.publish('paginatedPosts', function(find, options, limit) {
   options = options || {};
   options.limit = limit;
-  
+
   // console.log('subscribing to paginated posts', find, options, limit);
 
   return Posts.find(find || {}, options);
@@ -61,6 +61,30 @@ Meteor.publish('postDigest', function(date) {
 
 Meteor.startup(function(){
   Posts.allow({
+      insert: canPostById
+    , update: canEditById
+    , remove: canEditById
+  });
+});
+
+//Resources
+
+Meteor.publish('singleResource', function(id) {
+  return Resources.find(id);
+});
+
+Meteor.publish('paginatedResources', function(find, options, limit) {
+  options = options || {};
+  options.limit = limit;
+
+  // console.log('subscribing to paginated posts', find, options, limit);
+
+  return Resources.find(find || {}, options);
+});
+
+
+Meteor.startup(function(){
+  Resources.allow({
       insert: canPostById
     , update: canEditById
     , remove: canEditById
